@@ -14,6 +14,7 @@ app.component('product-display', {
         </div>
         <div class="product-info">
           <h1>{{ title }}</h1>
+          <p>{{ name }}</p>
   
           <p v-if="inStock">In Stock</p>
           <p v-else>Out of Stock</p>
@@ -40,6 +41,7 @@ app.component('product-display', {
     data() {
         return {
             cart: 0,
+            name: 'HungHTGCC230015',
             product: 'Socks',
             brand: 'Vue Mastery',
             selectedVariant: 0,
