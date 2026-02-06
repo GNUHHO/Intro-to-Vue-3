@@ -14,6 +14,7 @@ app.component('product-display', {
       </div>
       <div class="product-info">
         <h1>{{ title }}</h1>
+        <P>{{ name }}</P>
 
         <p v-if="inStock">In Stock</p>
         <p v-else>Out of Stock</p>
@@ -39,11 +40,20 @@ app.component('product-display', {
           v-on:click="addToCart">
           Add to Cart
         </button>
+        <!-- Lesson 10 challenge remove button -->
+        <button 
+            class="button" 
+            :class="{ disabledButton: !inStock }" 
+            :disabled="!inStock" 
+            @click="removeFromCart">
+            Remove Item
+        </button>
       </div>
     </div>
   </div>`,
   data() {
     return {
+        name: 'HungHTGCC230015',
         product: 'Socks',
         brand: 'Vue Mastery',
         selectedVariant: 0,
@@ -56,8 +66,11 @@ app.component('product-display', {
   },
   methods: {
       addToCart() {
-          this.cart += 1
+          this.$emit('add-to-cart', this.variants[this.selectedVariant].id)
       },
+      removeFromCart() {
+          this.$emit('remove-from-cart', this.variants[this.selectedVariant].id)
+        },
       updateVariant(index) {
           this.selectedVariant = index
       }
